@@ -12,7 +12,8 @@
   "devDependencies": {
     "@ui5/cli": "^4.0.16",
     "@sap/ux-ui5-tooling": "1",
-    "ui5-task-zipper": "^3"
+    "ui5-task-zipper": "^3.4.2",
+    "yazl": "^3.3.1"
   },
   "scripts": {
     "deploy-config": "npx -p @sap/ux-ui5-tooling fiori add deploy-config cf",

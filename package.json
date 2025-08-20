@@ -22,51 +22,61 @@
     "@cap-js/cds-test": "^0.4.0",
     "@cap-js/cds-types": "^0.13.0",
     "@cap-js/sqlite": "^2",
-    "jest": "^30.0.5"
+    "@sap/cds-dk": ">=8",
+    "buffer-crc32": "^1.0.0",
+    "jest": "^30.0.5",
+    "ui5-task-zipper": "^3.4.2",
+    "yazl": "^3.3.1"
   },
   "scripts": {
     "test": "npx jest tests/test.js",
     "start": "cds-serve",
     "watch-incidents": "cds watch --open incidents/webapp/index.html?sap-ui-xx-viewCache=false"
   },
-  "cds": {
-    "requires": {
-      "[development]": {
-        "auth": {
-          "kind": "mocked",
-          "users": {
-            "incident.support@tester.sap.com": {
-              "password": "initial",
-              "roles": [
-                "support"
-              ]
-            },
-            "alice": {
-              "roles": [
-                "support"
-              ]
-            },
-            "bob": {
-              "roles": [
-                "support"
-              ]
-            }
-          }
-        }
+"cds": {
+  "requires": {
+    "API_BUSINESS_PARTNER": {
+      "kind": "odata",
+      "model": "srv/external/API_BUSINESS_PARTNER",
+      "credentials": {
+        "destination": "API_BUSINESS_PARTNER",
+        "path": "odata/v2/api-business-partner"
       },
       "[production]": {
-        "db": "hana",
-        "auth": "xsuaa"
-      },
-      "destinations": true,
-      "html5-runtime": true,
-      "workzone": true,
-      "API_BUSINESS_PARTNER": {
-        "kind": "odata-v2",
-        "model": "srv/external/API_BUSINESS_PARTNER"
+        "credentials": {
+          "destination": "your-destination-name",
+          "path": "odata/v2/api-business-partner"
+        }
       }
-    }
-  },
+    },
+    "[development]": {
+      "auth": {
+        "kind": "mocked",
+        "users": {
+          "incident.support@tester.sap.com": {
+            "password": "initial",
+            "roles": ["support"]
+          },
+          "alice": {
+            "roles": ["support"]
+          },
+          "bob": {
+            "roles": ["support"]
+          }
+        }
+      }
+    },
+    "[production]": {
+      "db": "hana",
+      "auth": "xsuaa",
+      "destination": "your-destination-name",
+      "path": "odata/v2/api-business-partner"
+    },
+    "destinations": true,
+    "html5-runtime": true,
+    "workzone": true
+  }
+},
   "sapux": [
     "app/incidents",
     "app/incidents"
